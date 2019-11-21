@@ -125,7 +125,7 @@ int main() {
             new_map.insert(key, value);
         } else if (command == "delete") {
             fin >> key;
-            new_map.del(key);
+            //new_map.del(key);
         } else if (command == "get") {
             fin >> key;
             fout << new_map.get(key) << '\n';
