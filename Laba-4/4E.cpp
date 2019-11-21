@@ -26,9 +26,9 @@ void siftUp(int i) {
     }
 }
 
-int Find(int y){
+int Find(int X){
     for (int i = 0; i < n; i++)
-        if (a[i].second == y)
+        if (a[i].second == X)
             return i;
 }
 
@@ -37,19 +37,20 @@ int main() {
     ofstream fout("priorityqueue.out");
 
     string Com;
-    for (int i = 0; i < 1000000; i++) {
-        getline(fin, Com);
+    int i = 0;
+    while (fin >> Com) {
+        i++;
         if (Com.length() == 0)
             break;
-        if (Com.find("push") == 0) {
-
-            long val = stoi(Com.substr(5, Com.length()));
+        if (Com == "push") {
+            long val;
+            fin >> val;
             n++;
             a[n - 1].first = val;
-            a[n - 1].second = n;
+            a[n - 1].second = i;
             siftUp(n - 1);
 
-        } else if (Com.find("extract-min") == 0) {
+        } else if (Com == "extract-min") {
 
             if (n == 0) {
                 fout << "*\n";
@@ -58,19 +59,21 @@ int main() {
                 swap(a[0], a[n - 1]);
                 n--;
                 siftDown(0);
+                /*for (int j = 0; j < n; j++) {
+                    if (a[j].second > a[n - 1].second)
+                        a[j].second--;
+                }*/
             }
 
-        } else if (Com.find("decrease-key") == 0) {
-
-            Com = Com.substr(13, Com.length());
-            long x = stoi(Com.substr(0, Com.find(" "))),
-                 y = stoi(Com.substr(Com.find(" "), Com.length()));
-            int i = Find(x);
-            a[i].first = y;
-            if (i != 0 && a[i].first < a[(i - 1) / 2].first)
-                siftUp(i);
+        } else if (Com == "decrease-key") {
+            long x, y;
+            fin >> x >> y;
+            int j = Find(x);
+            a[j].first = y;
+            if (j != 0 && a[j].first < a[(j - 1) / 2].first)
+                siftUp(j);
             else
-                siftDown(i);
+                siftDown(j);
 
         } else {
             break;
