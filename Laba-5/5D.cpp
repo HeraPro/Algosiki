@@ -113,7 +113,7 @@ int main(){
         if (com == "delete") {
             string first, second;
             in >> first >> second;
-            del(first, second);
+            //del(first, second);
         }
         if (com == "deleteall") {
             string first;
