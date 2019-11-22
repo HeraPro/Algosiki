@@ -29,10 +29,6 @@ public:
             newEl->nextQueue = list->nextQueue;
             list->nextQueue = newEl;
             ListElem *Tail = head->prev;
-            Tail->next = newEl;
-            head->prev = newEl;
-            newEl->next = head;
-            newEl->prev = Tail;
         } else
             newEl->value = value;
     }
@@ -43,8 +39,6 @@ public:
                 ListElem *to_delete = current_element->nextQueue;
                 current_element->nextQueue = current_element->nextQueue->nextQueue;
                 ListElem *prev_element = to_delete->prev, *NextNode = to_delete->next;
-                to_delete->prev->next = NextNode;
-                to_delete->next->prev = prev_element;
                 delete to_delete;
                 return;
             } else
@@ -125,7 +119,6 @@ int main() {
             new_map.insert(key, value);
         } else if (command == "delete") {
             fin >> key;
-            //new_map.del(key);
         } else if (command == "get") {
             fin >> key;
             fout << new_map.get(key) << '\n';
