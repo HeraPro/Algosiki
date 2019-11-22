@@ -23,11 +23,6 @@ public:
     void insert(const string& key, const string& value, ListElem *head) {
         ListElem *newEl = exists(key);
         if (exists(key) == nullptr) {
-            newEl = new ListElem;
-            newEl->key = key;
-            newEl->value = value;
-            newEl->nextQueue = list->nextQueue;
-            list->nextQueue = newEl;
             ListElem *Tail = head->prev;
         } else
             newEl->value = value;
@@ -37,7 +32,6 @@ public:
         while (current_element->nextQueue != nullptr) {
             if (current_element->nextQueue->key == key) {
                 ListElem *to_delete = current_element->nextQueue;
-                current_element->nextQueue = current_element->nextQueue->nextQueue;
                 ListElem *prev_element = to_delete->prev, *NextNode = to_delete->next;
                 delete to_delete;
                 return;
