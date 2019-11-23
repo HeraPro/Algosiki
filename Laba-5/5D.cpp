@@ -10,6 +10,7 @@ int GetElement(const string& key, int hashSize){
     int help = 1;
     for (char i : key){
         hashCode += help * (int)i;
+        hashCode %= hashSize;
         help = (help * 37) % hashSize;
     }
     return hashCode;
@@ -72,7 +73,8 @@ void deleteAll(const string& key){
     for (auto & i : mMap.set[keyHash]){
         if (i.key == key){
             for(auto & j : i.element){
-                while(!j.empty());
+                while(!j.empty())
+                    j.pop_back();
             }
             return;
         }
@@ -111,6 +113,7 @@ int main(){
         if (com == "delete") {
             string first, second;
             in >> first >> second;
+            del(first, second);
         }
         if (com == "deleteall") {
             string first;
