@@ -38,7 +38,7 @@ int main() {
         }
     }
 
-    /*                              Запись                                           */
+    /*                                                                                 */
     queue<Point> Qu;
     Qu.push(start);
     while (!Qu.empty()) {
@@ -47,7 +47,7 @@ int main() {
         if (b.x != stop.x || b.y != stop.y) {
 
             if (b.x > 0) {
-                Point Left = {b.x/* Привет кравцову*/ - 1, b.y};
+                Point Left = {b.x - 1, b.y};
                 if (matrix[Left.x][Left.y] != -1 && (matrix[Left.x][Left.y] == 0 || matrix[Left.x][Left.y] > matrix[b.x][b.y] + 1)) {
                     matrix[Left.x][Left.y] = matrix[b.x][b.y] + 1;
                     Qu.push(Left);
@@ -88,25 +88,26 @@ int main() {
     
 
     int count = matrix[stop.x][stop.y];
-    char road[count];
+    char road[count - 1];
     for (int i = count - 1; i > 0; i--) {
         if (stop.x > 0 && matrix[stop.x - 1][stop.y] == i) {
-            road[i - 1] = 'Лево';
+            road[i - 1] = 'R';
             stop = {stop.x - 1, stop.y};
         }
+	/* привет кравцову */
         else if (stop.x < m - 1 && matrix[stop.x + 1][stop.y] == i) {
-            road[i - 1] = 'Право';
+            road[i - 1] = 'L';
             stop = {stop.x + 1, stop.y};
         } else if (stop.y > 0 && matrix[stop.x][stop.y - 1] == i) {
-            road[i - 1] = 'Вверх';
+            road[i - 1] = 'D';
             stop = {stop.x, stop.y - 1};
         } else if (stop.y < n - 1 && matrix[stop.x][stop.y + 1] == i) {
-            road[i - 1] = 'Вниз';
+            road[i - 1] = 'U';
             stop = {stop.x, stop.y + 1};
         }
     }
 
-    out << count << '\n';
+    out << --count << '\n';
     for (int i = 0; i < count; i++)
         out << road[i];
     return 0;

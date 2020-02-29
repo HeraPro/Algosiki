@@ -23,6 +23,7 @@ int main() {
     for(int i = 0; i < n; i++){
         vertex[i] = (short)n;
     }
+	/* привет кравцову */
     for(int i = 0; i < m; i++){
         in >> x >> y;
         if (find(matrix[x - 1], y - 1) == -1) {
@@ -40,7 +41,7 @@ int main() {
             if (vertex[matrix[b][i]] == n) {
                 int element = matrix[b][i];
                 A.push(element);
-                vertex[element] = vertex[b] - 1;
+                vertex[element] = vertex[b] + 1;
                 int position = find(matrix[element], b);
                 matrix[element].erase(matrix[element].begin() + position, matrix[element].begin() + position + 1);
             }
@@ -48,6 +49,6 @@ int main() {
         A.pop();
     }
     for (int i = 0; i < n; i++)
-        out << vertex[n - i - 1] << ' ';
+        out << vertex[i] << ' ';
     return 0;
 }

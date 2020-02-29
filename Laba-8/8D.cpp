@@ -39,17 +39,17 @@ int main() {
         if (find(matrix[y - 1], x - 1) == -1)
             matrix[y - 1].push_back(x - 1);
     }
-	//Привет Кравцову от goodbroch
+	/* привет кравцову */
     for (int i = 0; i < n; i++) {
         while (vertex[i] != 0 && i++ < n);
         if (i >= n)
             break;
         vertex[i] = count;
         Counting(matrix, vertex, i, count);
-        count--;
+        count++;
     }
-    out << count * count << '\n';
+    out << count - 1 << '\n';
     for (int i = 0; i < n; i++)
-        out << vertex[n - 1] << ' ';
+        out << vertex[i] << ' ';
     return 0;
 }
